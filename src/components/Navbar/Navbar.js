@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
+import { createPopper } from "@popperjs/core";
+
+import Button from "react-bootstrap/Button";
+import Dropdown from "react-bootstrap/Dropdown";
 
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 
 function Navbar() {
   // Get the value from the context
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, user, logOutUser, isAdmin } = useContext(AuthContext);
 
   return (
     <nav className="Navbar">
@@ -33,7 +37,7 @@ function Navbar() {
 
       <div className="profile-img-wrapper">
         {user && (
-          <Link to="/profile">
+          <Link to="/user">
             <img className="profile-img" src={user.image} alt="profile" />
           </Link>
         )}
