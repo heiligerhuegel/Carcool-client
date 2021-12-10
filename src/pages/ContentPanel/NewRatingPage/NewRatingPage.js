@@ -8,6 +8,9 @@ function NewRatingPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  const [brand, setBrand] = useState("");
+  const [model, setModel] = useState("");
+
   const [imageUrl, setImageUrl] = useState("");
 
   const [totalScore, setTotalScore] = useState(0);
@@ -81,6 +84,20 @@ function NewRatingPage() {
         value,
         daily,
       };
+
+      const newRating = {
+        user: "UserId",
+        brand,
+        model,
+        title,
+        description,
+        ratings: {
+          Weekend: { style, acceleration, handling, fun, cool },
+          Daily: { features, comfort, quality, practicality, value },
+        },
+      };
+
+      const response = await axios.post("http://localhost:5005/api/newrating");
     } catch (error) {
       // If the request resolves with an error, set the error message in the state
       setErrorMessage("Something went wrong");
