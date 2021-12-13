@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+import { Container, Button, Carousel, Card } from "react-bootstrap";
+
 function AllRatingsPage() {
   const { carId } = useParams();
 
@@ -13,9 +15,7 @@ function AllRatingsPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(
-        `http://localhost:5005/api/onecar/${carId}`
-      );
+      const result = await axios.get(`http://localhost:5005/api/onecar/${carId}`);
       setCar(result.data);
     };
     fetchData();
@@ -33,35 +33,29 @@ function AllRatingsPage() {
   }, [car]);
 
   return (
-    <div>
+    <Container>
       {car && (
         <div>
-          <div className="allimages">
-            {images &&
-              images.map((element) => {
-                return (
-                  <div className="image">
-                    <img src={element} alt="Car" />
-                  </div>
-                );
-              })}
-          </div>
           <h2>{car.brand}</h2>
           <h3>{car.model}</h3>
           {ratings &&
             ratings.map((element) => {
               return (
-                <Link to={`/rating/${element._id}`}>
-                  <div key={element._id}>
-                    <h3>{element.title}</h3>
-                    <p>{element.description}</p>
-                  </div>
-                </Link>
+                <Card style={{ width: "18rem" }}>
+                  <Card.Img variant="top" src={element.image} />
+                  <Card.Body>
+                    <Card.Title>{element.title}</Card.Title>
+                    <Card.Text>{element.totalScore}</Card.Text>
+                    <Link to={`/rating/${element._id}`}>
+                      <Button variant="primary">somewhere</Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
               );
             })}
         </div>
       )}
-    </div>
+    </Container>
   );
 }
 

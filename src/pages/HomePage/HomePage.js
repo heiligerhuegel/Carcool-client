@@ -2,77 +2,70 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Container, Button, Carousel, Card, Col, Row } from "react-bootstrap";
 
 function HomePage() {
   const [cars, setCars] = useState([]);
-  const [carImages, setCarImages] = useState([]);
+  const [carImages, setCarImages] = useState(null);
 
-  useEffect(async () => {
-    const result = await axios.get("http://localhost:5005/api/cars");
-    setCars(result.data);
+  useEffect(() => {
+    const getCars = async () => {
+      const result = await axios.get("http://localhost:5005/api/cars");
+      setCars(result.data);
+      console.log(result.data);
+    };
+    getCars();
   }, []);
 
   useEffect(() => {
     const carsImagesData = cars.map((element) => {
-      return element.image[0];
+      if (element.image[0] !== undefined && element.image[0] !== null) {
+        console.log(element.image[0]);
+        return element.image[0];
+      }
     });
     setCarImages(carsImagesData);
+    console.log(carsImagesData);
   }, [cars]);
 
   return (
-    <div key="landing">
-      <div>
-        <h1>Welcome to Carcool</h1>
-      </div>
+    <Container>
+      <h1>Welcome to Carcool</h1>
 
-      <div className="images">
-        {carImages &&
-          carImages.map((element) => {
-            return (
-              <div className="image" key={element._id}>
-                <img src={element} alt="Car" />
-              </div>
-            );
-          })}
-      </div>
+      <Container>
+        {carImages && (
+          <Carousel>
+            {carImages.map((element) => {
+              return (
+                <Carousel.Item interval={1000}>
+                  <img className="d-block w-100" src={element} alt="First slide" />
+                </Carousel.Item>
+              );
+            })}
+          </Carousel>
+        )}
+      </Container>
 
-      <div>
+      <div className="container-fluid">
         <h2> All the rated Cars </h2>
+
         {cars &&
           cars.map((element) => {
             return (
-              <div key={element._id}>
-                <h3>{element.brand}</h3>
-                <h2>{element.model}</h2>
-              </div>
+              <Card style={{ width: "18rem" }}>
+                <Card.Img variant="top" src={element.image} />
+                <Card.Body>
+                  <Card.Title>{element.model}</Card.Title>
+                  <Card.Text>{element.brand}</Card.Text>
+                  <Link to={`/car/${element._id}`}>
+                    <Button variant="primary">somewhere</Button>
+                  </Link>
+                </Card.Body>
+              </Card>
             );
           })}
       </div>
-
-      <div className="debug">
-        <Link to="/user">user</Link>
-        <br />
-
-        <Link to="/user/edit">user,edit</Link>
-        <br />
-        <Link to="/newrating">newrating</Link>
-        <br />
-        <Link to="/allcars">allcars</Link>
-        <br />
-        <Link to="/adminpanel">adminpanel</Link>
-        <br />
-        <Link to="/adminpanel/:userId">amin one user</Link>
-        <br />
-        <Link to="/adminpanel/:userId/ratings">admin one user ratings</Link>
-        <br />
-        <Link to="/adminpanel/:userId/editrating/:ratingId">
-          admin edit one rating
-        </Link>
-        <br />
-        <Link to="/adminpanel/:userId/edituser/">admin edit one user</Link>
-        <br />
-      </div>
-    </div>
+    </Container>
   );
 }
 

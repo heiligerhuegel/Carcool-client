@@ -1,7 +1,6 @@
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/Navbar/Navbar";
+import NavbarComponent from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage/HomePage";
 
 import SignupPage from "./pages/LoginPanel/SignupPage/SignupPage";
@@ -30,7 +29,7 @@ import IsAnon from "./components/IsAnon/IsAnon";
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <NavbarComponent />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
