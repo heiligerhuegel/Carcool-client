@@ -20,21 +20,21 @@ function NewRatingPage() {
 
   const [image, setImage] = useState("");
 
-  const [totalScore, setTotalScore] = useState(10);
+  const [totalScore, setTotalScore] = useState(0);
 
-  const [style, setStyle] = useState(1);
-  const [acceleration, setAcceleration] = useState(1);
-  const [handling, setHandling] = useState(1);
-  const [funfactor, setFun] = useState(1);
-  const [coolfactor, setCool] = useState(1);
-  const [weekend, setWeekend] = useState(5);
+  const [style, setStyle] = useState(0);
+  const [acceleration, setAcceleration] = useState(0);
+  const [handling, setHandling] = useState(0);
+  const [funfactor, setFun] = useState(0);
+  const [coolfactor, setCool] = useState(0);
+  const [weekend, setWeekend] = useState(0);
 
-  const [features, setFeatures] = useState(1);
-  const [comfort, setComfort] = useState(1);
-  const [quality, setQuality] = useState(1);
-  const [practicality, setPracticality] = useState(1);
-  const [value, setValue] = useState(1);
-  const [daily, setDaily] = useState(5);
+  const [features, setFeatures] = useState(0);
+  const [comfort, setComfort] = useState(0);
+  const [quality, setQuality] = useState(0);
+  const [practicality, setPracticality] = useState(0);
+  const [value, setValue] = useState(0);
+  const [daily, setDaily] = useState(0);
 
   useEffect(() => {
     const getAllBrands = async () => {
@@ -105,9 +105,11 @@ function NewRatingPage() {
   const handleAllCarBrands = async (e) => {
     setBrand(e.target.value);
   };
+
   const handleAllCarModels = async (e) => {
     setModel(e.target.value);
   };
+
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -135,13 +137,14 @@ function NewRatingPage() {
       setErrorMessage("Something went wrong");
     }
   };
+
   const handleFileUpload = async (e) => {
     try {
       const uploadData = new FormData();
 
       uploadData.append("imageUrl", e.target.files[0]);
       const response = await fileService.uploadImage(uploadData);
-      console.log(response.data);
+      console.log(response.data.secure_url);
       setImage(response.data.secure_url);
     } catch (error) {
       setErrorMessage("Something went wrong");
@@ -152,258 +155,189 @@ function NewRatingPage() {
     <Container>
       <h1>Create a new Review:</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Group as={Row}>
-          <Col xs="6">
-            <Form.Label>Brand:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Select onChange={handleAllCarBrands}>
-              {allCars &&
-                allCars.map((element) => {
-                  return <option value={element.Make_Name}>{element.Make_Name}</option>;
-                })}
-            </Form.Select>
-          </Col>
-        </Form.Group>
+        <Container>
+          {allCars && (
+            <Form.Group as={Row}>
+              <Col xs="6">
+                <Form.Label>Brand:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <Form.Select placeholder="Select a Brand" onChange={handleAllCarBrands}>
+                  <option>Select a Car Brand</option>
+                  {allCars &&
+                    allCars.map((element) => {
+                      return <option value={element.Make_Name}>{element.Make_Name}</option>;
+                    })}
+                </Form.Select>
+              </Col>
+            </Form.Group>
+          )}
+          <br />
+          {allModels && (
+            <Form.Group as={Row}>
+              <Col xs="6">
+                <Form.Label>Model:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <Form.Select onChange={handleAllCarModels}>
+                  <option>Select a Car Model</option>
+                  {allModels &&
+                    allModels.map((element) => {
+                      return <option value={element.Model_Name}>{element.Model_Name}</option>;
+                    })}
+                </Form.Select>
+              </Col>
+            </Form.Group>
+          )}
+        </Container>
+        <br />
+        {model && (
+          <Container>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Title:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <Form.Control type="text" value={title} onChange={handleTitle} />
+              </Col>
+            </Form.Group>
 
-        <Form.Group as={Row}>
-          <Col xs="6">
-            <Form.Label>Model:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Select onChange={handleAllCarModels}>
-              {allModels &&
-                allModels.map((element) => {
-                  return <option value={element.Model_Name}>{element.Model_Name}</option>;
-                })}
-            </Form.Select>
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Description:</Form.Label>
+              </Col>
+              <Col xs="12">
+                <Form.Control as="textarea" rows={3} value={description} onChange={handleDescription} />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Title:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Control type="text" value={title} onChange={handleTitle} />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Style:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <RangeSlider value={style} onChange={handleStyle} step={1} min="0" max="10" />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Description:</Form.Label>
-          </Col>
-          <Col xs="12">
-            <Form.Control as="textarea" rows={3} value={description} onChange={handleDescription} />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Acceleration:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <RangeSlider value={acceleration} onChange={handleAcceleration} step={1} min="0" max="10" />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Style:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider
-              value={style}
-              onChange={handleStyle}
-              step={1}
-              min="1"
-              max="10"
-              tooltipPlacement="top"
-              tooltip="on"
-            />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Handling:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <RangeSlider value={handling} onChange={handleHandling} step={1} min="0" max="10" />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Acceleration:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider
-              value={acceleration}
-              onChange={handleAcceleration}
-              step={1}
-              min="1"
-              max="10"
-              tooltipPlacement="top"
-              tooltip="on"
-            />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Fun:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <RangeSlider value={funfactor} onChange={handleFun} step={1} min="0" max="10" />
+              </Col>
+            </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Cool:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <RangeSlider value={coolfactor} onChange={handleCool} step={1} min="0" max="10" />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Handling:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider
-              value={handling}
-              onChange={handleHandling}
-              step={1}
-              min="1"
-              max="10"
-              tooltipPlacement="top"
-              tooltip="on"
-            />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Weekend Total:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <Form.Control type="number" value={weekend} readOnly />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Fun:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider
-              value={funfactor}
-              onChange={handleFun}
-              step={1}
-              min="1"
-              max="10"
-              tooltipPlacement="top"
-              tooltip="on"
-            />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Cool:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider
-              value={coolfactor}
-              onChange={handleCool}
-              step={1}
-              min="1"
-              max="10"
-              tooltipPlacement="top"
-              tooltip="on"
-            />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Features:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <RangeSlider value={features} onChange={handleFeature} step={1} min="0" max="10" />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Weekend Total:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Control type="number" value={weekend} readOnly />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Comfort:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <RangeSlider value={comfort} onChange={handleComfort} step={1} min="0" max="10" />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Features:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider
-              value={features}
-              onChange={handleFeature}
-              step={1}
-              min="1"
-              max="10"
-              tooltipPlacement="top"
-              tooltip="on"
-            />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Quality:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <RangeSlider value={quality} onChange={handleQuality} step={1} min="0" max="10" />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Comfort:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider
-              value={comfort}
-              onChange={handleComfort}
-              step={1}
-              min="1"
-              max="10"
-              tooltipPlacement="top"
-              tooltip="on"
-            />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Practicality:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <RangeSlider value={practicality} onChange={handlePracticality} step={1} min="0" max="10" />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Quality:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider
-              value={quality}
-              onChange={handleQuality}
-              step={1}
-              min="1"
-              max="10"
-              tooltipPlacement="top"
-              tooltip="on"
-            />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Value:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <RangeSlider value={value} onChange={handleValue} step={1} min="0" max="10" />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Practicality:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider
-              value={practicality}
-              onChange={handlePracticality}
-              step={1}
-              min="1"
-              max="10"
-              tooltipPlacement="top"
-              tooltip="on"
-            />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Daily Total:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <Form.Control type="number" value={daily} readOnly />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Value:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider
-              value={value}
-              onChange={handleValue}
-              step={1}
-              min="1"
-              max="10"
-              tooltipPlacement="top"
-              tooltip="on"
-            />
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Total Score:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <Form.Control type="number" value={totalScore} readOnly />
+              </Col>
+            </Form.Group>
 
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Daily Total:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Control type="number" value={daily} readOnly />
-          </Col>
-        </Form.Group>
-
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Total Score:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Control type="number" value={totalScore} readOnly />
-          </Col>
-        </Form.Group>
-
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Upload an Image:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Control type="file" size="sm" onChange={handleFileUpload} />
-          </Col>
-        </Form.Group>
-
-        <Button type="submit">Sign Up</Button>
+            <Form.Group className="mb-3" as={Row}>
+              <Col xs="6">
+                <Form.Label>Upload an Image:</Form.Label>
+              </Col>
+              <Col xs="6">
+                <Form.Control type="file" size="sm" onChange={handleFileUpload} />
+              </Col>
+            </Form.Group>
+            {(title, description && <Button type="submit">Submit</Button>)}
+          </Container>
+        )}
       </Form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}

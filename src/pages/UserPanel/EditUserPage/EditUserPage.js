@@ -6,6 +6,8 @@ import fileService from "./../../../services/file.service";
 import { AuthContext } from "./../../../context/auth.context";
 import { useContext } from "react";
 
+import { Form, Row, Col, Button, Container } from "react-bootstrap";
+
 function EditUserPage() {
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -28,7 +30,7 @@ function EditUserPage() {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       logOutUser();
-      navigate("/user");
+      navigate("/login");
     } catch (error) {
       // If the request resolves with an error, set the error message in the state
       setErrorMessage("Something went wrong");
@@ -51,25 +53,27 @@ function EditUserPage() {
     }
   };
   return (
-    <div className="EditUserPage">
+    <Container>
       <h1>Login</h1>
 
-      <form onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input
-          type="text"
-          name="email"
-          value={name}
-          onChange={handleUsername}
-        />
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control type="text" placeholder="Enter new Username" value={name} onChange={handleUsername} />
+        </Form.Group>
 
-        <label>Profile Picture: </label>
-        <input name="image" type="file" onChange={handleFileUpload}></input>
+        <Form.Group className="mb-3">
+          <Form.Label>Profilepicture:</Form.Label>
+          <Form.Control type="file" size="sm" onChange={handleFileUpload} />
+        </Form.Group>
 
-        <button type="submit">Save</button>
-      </form>
+        <Button variant="primary" type="submit">
+          Change and Logout to reset.
+        </Button>
+      </Form>
+      <br />
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-    </div>
+    </Container>
   );
 }
 

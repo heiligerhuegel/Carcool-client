@@ -104,6 +104,7 @@ function App() {
             </IsPrivate>
           }
         />
+       
         <Route
           path="/adminpanel"
           element={

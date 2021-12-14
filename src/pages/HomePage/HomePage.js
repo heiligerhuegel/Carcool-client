@@ -5,8 +5,10 @@ import axios from "axios";
 import { Container, Button, Carousel, Card, Col, Row } from "react-bootstrap";
 
 function HomePage() {
-  const [cars, setCars] = useState([]);
+  const [cars, setCars] = useState(null);
   const [carImages, setCarImages] = useState(null);
+
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const getCars = async () => {
@@ -18,22 +20,33 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
-    const carsImagesData = cars.map((element) => {
-      if (element.image[0] !== undefined && element.image[0] !== null) {
-        console.log(element.image[0]);
-        return element.image[0];
+    if (cars) {
+      console.log(cars);
+      const carImagesData = cars
+        .filter((element) => {
+          if (element.image[0] === undefined || element.image[0] === null || element.image[0] === "") {
+            return false;
+          } else {
+            return true;
+          }
+        })
+        .map((element) => {
+          return element.image[0];
+        });
+
+      console.log("carImagesData", carImagesData);
+      setCarImages(carImagesData);
+      if (carImagesData.length > 0) {
+        setShow(true);
       }
-    });
-    setCarImages(carsImagesData);
-    console.log(carsImagesData);
+    }
   }, [cars]);
 
   return (
     <Container>
       <h1>Welcome to Carcool</h1>
-
-      <Container>
-        {carImages && (
+      {show && (
+        <Container>
           <Carousel>
             {carImages.map((element) => {
               return (
@@ -43,28 +56,32 @@ function HomePage() {
               );
             })}
           </Carousel>
-        )}
-      </Container>
-
-      <div className="container-fluid">
-        <h2> All the rated Cars </h2>
-
-        {cars &&
-          cars.map((element) => {
-            return (
-              <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={element.image} />
-                <Card.Body>
-                  <Card.Title>{element.model}</Card.Title>
-                  <Card.Text>{element.brand}</Card.Text>
-                  <Link to={`/car/${element._id}`}>
-                    <Button variant="primary">somewhere</Button>
-                  </Link>
-                </Card.Body>
-              </Card>
-            );
-          })}
-      </div>
+        </Container>
+      )}
+      {cars && (
+        <Container>
+          <h2> All the rated Cars </h2>
+          <Row className="justify-content-md-center">
+            {cars &&
+              cars.map((element) => {
+                return (
+                  <Col>
+                    <Card style={{ width: "16rem" }}>
+                      <Card.Img variant="top" src={element.image} />
+                      <Card.Body>
+                        <Card.Title>{element.model}</Card.Title>
+                        <Card.Text>{element.brand}</Card.Text>
+                        <Link to={`/car/${element._id}`}>
+                          <Button variant="primary">See More</Button>
+                        </Link>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                );
+              })}
+          </Row>
+        </Container>
+      )}
     </Container>
   );
 }

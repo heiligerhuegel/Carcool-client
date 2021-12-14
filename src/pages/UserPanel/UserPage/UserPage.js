@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+
 import axios from "axios";
-import { AuthContext } from "./../../../context/auth.context";
+import { Container, Button, Card, Col, Row } from "react-bootstrap";
 
 function UserPage() {
   const [ratings, setRatings] = useState([]);
@@ -22,23 +22,28 @@ function UserPage() {
   }, []);
 
   return (
-    <div>
+    <Container>
       <h1>Profile Page</h1>
-
-      {ratings &&
-        ratings.map((element) => {
-          return (
-            <div className="rating" key={element._id}>
-              <Link to={`/rating/${element._id}`}>
-                <div key={element._id}>
-                  <h3>{element.title}</h3>
-                  <p>{element.description}</p>
-                </div>
-              </Link>
-            </div>
-          );
-        })}
-    </div>
+      <Link to="/user/edit">Edit Profile</Link>
+      <Row>
+        {ratings &&
+          ratings.map((element) => {
+            return (
+              <Col>
+                <Card style={{ width: "18rem" }}>
+                  <Card.Body>
+                    <Card.Title>{element.title}</Card.Title>
+                    <Card.Text>{element.description}</Card.Text>
+                    <Link to={`/user/${element._id}`}>
+                      <Button variant="primary">somewhere</Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          })}
+      </Row>
+    </Container>
   );
 }
 

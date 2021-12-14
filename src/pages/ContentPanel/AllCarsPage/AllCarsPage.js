@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { Container, Button, Carousel, Card } from "react-bootstrap";
+import { Container, Button, Carousel, Card, Row, Col } from "react-bootstrap";
 
 function AllCarsPage() {
   const [cars, setCars] = useState([]);
@@ -18,21 +18,25 @@ function AllCarsPage() {
   return (
     <Container>
       <h2> All the rated Cars </h2>
-      {cars &&
-        cars.map((element) => {
-          return (
-            <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={element.image} />
-              <Card.Body>
-                <Card.Title>{element.model}</Card.Title>
-                <Card.Text>{element.brand}</Card.Text>
-                <Link to={`/car/${element._id}`}>
-                  <Button variant="primary">somewhere</Button>
-                </Link>
-              </Card.Body>
-            </Card>
-          );
-        })}
+      <Row>
+        {cars &&
+          cars.map((element) => {
+            return (
+              <Col>
+                <Card style={{ width: "16rem" }}>
+                  <Card.Img variant="top" src={element.image} />
+                  <Card.Body>
+                    <Card.Title>{element.model}</Card.Title>
+                    <Card.Text>{element.brand}</Card.Text>
+                    <Link to={`/car/${element._id}`}>
+                      <Button variant="primary">somewhere</Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          })}
+      </Row>
     </Container>
   );
 }

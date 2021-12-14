@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Container, Form, Button, Col, Row } from "react-bootstrap";
 
 import fileService from "./../../../services/file.service";
 
@@ -53,34 +54,46 @@ function SignupPage(props) {
   };
 
   return (
-    <div className="SignupPage">
+    <Container>
       <h1>Sign Up</h1>
 
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="text" name="email" value={email} onChange={handleEmail} />
+      <Form onSubmit={handleSignupSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address:</Form.Label>
+          <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmail} />
+        </Form.Group>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control type="password" placeholder="Password" value={password} onChange={handlePassword} />
+        </Form.Group>
 
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
+        <Form.Group className="mb-3" c>
+          <Form.Label>Username:</Form.Label>
+          <Form.Control type="test" placeholder="Enter Username" value={name} onChange={handleName} />
+        </Form.Group>
 
-        <input type="file" onChange={handleFileUpload}></input>
+        <Form.Group className="mb-3" as={Row}>
+          <Col xs="6">
+            <Form.Label>Profilepicture:</Form.Label>
+          </Col>
+          <Col xs="6">
+            <Form.Control type="file" size="sm" onChange={handleFileUpload} />
+          </Col>
+        </Form.Group>
 
-        <button type="submit">Sign Up</button>
-      </form>
-
+        <Button variant="primary" type="submit">
+          Sign Up
+        </Button>
+      </Form>
+      <br />
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
-    </div>
+      <Link to={"/login"}>
+        <Button>Log In</Button>
+      </Link>
+    </Container>
   );
 }
 
