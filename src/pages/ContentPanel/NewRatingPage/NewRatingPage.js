@@ -152,10 +152,10 @@ function NewRatingPage() {
   };
 
   return (
-    <Container>
+    <Container key="newRatingsPage">
       <h1>Create a new Review:</h1>
       <Form onSubmit={handleSubmit}>
-        <Container>
+        <Container key="carselector">
           {allCars && (
             <Form.Group as={Row}>
               <Col xs="6">
@@ -166,7 +166,7 @@ function NewRatingPage() {
                   <option>Select a Car Brand</option>
                   {allCars &&
                     allCars.map((element) => {
-                      return <option value={element.Make_Name}>{element.Make_Name}</option>;
+                      return <option>{element.Make_Name}</option>;
                     })}
                 </Form.Select>
               </Col>

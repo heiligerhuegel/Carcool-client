@@ -13,6 +13,7 @@ function HomePage() {
   useEffect(() => {
     const getCars = async () => {
       const result = await axios.get("http://localhost:5005/api/cars");
+
       setCars(result.data);
       console.log(result.data);
     };
@@ -44,14 +45,14 @@ function HomePage() {
 
   return (
     <Container>
-      <h1>Welcome to Carcool</h1>
+      <h1 className="mt-5 mb-4 text-center">Welcome to Carcool</h1>
       {show && (
         <Container>
           <Carousel>
             {carImages.map((element) => {
               return (
-                <Carousel.Item interval={1000}>
-                  <img className="d-block w-100" src={element} alt="First slide" />
+                <Carousel.Item interval={5000}>
+                  <img className="d-block w-100" src={element} alt="First slide" style={{ width: "100vw" }} />
                 </Carousel.Item>
               );
             })}
@@ -59,18 +60,18 @@ function HomePage() {
         </Container>
       )}
       {cars && (
-        <Container>
-          <h2> All the rated Cars </h2>
-          <Row className="justify-content-md-center">
+        <Container className="mx-auto">
+          <h2 className="mt-3 mb-4 text-center"> All the rated Cars </h2>
+          <Row>
             {cars &&
               cars.map((element) => {
                 return (
                   <Col>
-                    <Card style={{ width: "16rem" }}>
-                      <Card.Img variant="top" src={element.image} />
+                    <Card className="mx-auto my-3" style={{ width: "13rem" }}>
+                      {/* <Card.Img variant="top" src={element.image[0]} /> */}
                       <Card.Body>
+                        <Card.Title>{element.brand}</Card.Title>
                         <Card.Title>{element.model}</Card.Title>
-                        <Card.Text>{element.brand}</Card.Text>
                         <Link to={`/car/${element._id}`}>
                           <Button variant="primary">See More</Button>
                         </Link>

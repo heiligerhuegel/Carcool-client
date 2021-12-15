@@ -45,7 +45,7 @@ function LoginPage(props) {
   };
 
   return (
-    <Container>
+    <Container className="my-3">
       <h1>Login</h1>
 
       <Form onSubmit={handleLoginSubmit}>

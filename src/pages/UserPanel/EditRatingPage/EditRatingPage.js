@@ -74,6 +74,7 @@ function EditRatingPage() {
   useEffect(() => {
     const subtotal = +weekend + +daily;
     setTotalScore(subtotal);
+    console.log(subtotal);
   }, [weekend, daily]);
 
   useEffect(() => {
@@ -123,12 +124,23 @@ function EditRatingPage() {
       console.log(newRating);
       const response = await axios.put(`http://localhost:5005/api/rating/${rating}`, newRating);
       console.log(response);
-      navigate(`/rating/${response.data._id}`);
+      navigate(`/user`);
     } catch (error) {
       // If the request resolves with an error, set the error message in the state
       setErrorMessage("Something went wrong");
     }
   };
+
+  const deleteRating = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:5005/api/rating/delete/${rating}`);
+      console.log(response);
+      navigate(`/user`);
+    } catch (error) {
+      setErrorMessage("Something went wrong");
+    }
+  };
+
   return (
     <Container>
       <h1>Edit this Review:</h1>
@@ -270,6 +282,13 @@ function EditRatingPage() {
           </Col>
         </Form.Group>
         <Button type="submit">Submit</Button>
+        {/* <Button
+          onClick={() => {
+            deleteRating();
+          }}
+        >
+          Delete Rating
+        </Button> */}
       </Form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
     </Container>

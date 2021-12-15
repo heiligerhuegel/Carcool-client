@@ -23,7 +23,7 @@ function NavbarComponent() {
           <Nav className="me-auto">
             <Nav.Link href="/allcars">All Cars</Nav.Link>
             <Nav.Link href="/newrating">New Rating</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            <NavDropdown title="Profile" id="basic-nav-dropdown">
               {!isLoggedIn && (
                 <NavDropdown.Item href="#action/3.1">
                   <Link className="nav-link" to="/signup">

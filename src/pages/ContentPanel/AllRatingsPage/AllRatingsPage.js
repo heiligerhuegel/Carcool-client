@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-import { Container, Button, Carousel, Card } from "react-bootstrap";
+import { Container, Button, Row, Col, Card } from "react-bootstrap";
 
 function AllRatingsPage() {
   const { carId } = useParams();
@@ -83,29 +83,32 @@ function AllRatingsPage() {
   // }, [car]);
 
   return (
-    <Container>
+    <Container className="mt-1 mx-auto text-center">
       {car && (
         <div>
-          <h1>{car.brand}</h1>
-          <h2>{car.model}</h2>
-          <h2>Average TotalScore: {totalScoreAvg}</h2>
-          <h4>Average Weekend Score: {totalWeeklyAvg}</h4>
-          <h4>Average Daily Score: {totalDailyAvg}</h4>
-          {ratings &&
-            ratings.map((element) => {
-              return (
-                <Card style={{ width: "18rem" }}>
-                  <Card.Img variant="top" src={element.image} />
-                  <Card.Body>
-                    <Card.Title>Title: {element.title}</Card.Title>
-                    <Card.Text>Totalscore: {element.totalScore}</Card.Text>
-                    <Link to={`/rating/${element._id}`}>
-                      <Button variant="primary">Read More</Button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              );
-            })}
+          <h1 className="mt-5 mb-1 text-center">{car.brand}</h1>
+          <h2 className="mt-4  text-center">{car.model}</h2>
+          <h2 className="mt-3  text-center">Average TotalScore: {totalScoreAvg}</h2>
+          <h4 className="mt-1  text-center">Average Weekend Score: {totalWeeklyAvg}</h4>
+          <h4 className="mt-1  text-center">Average Daily Score: {totalDailyAvg}</h4>
+          <Container as={Row} className="mt-1 mx-auto text-center">
+            {ratings &&
+              ratings.map((element) => {
+                return (
+                  <Col className="mx-auto">
+                    <Card className="mx-auto my-3" style={{ width: "18rem" }}>
+                      <Card.Body>
+                        <Card.Title>Title: {element.title}</Card.Title>
+                        <Card.Text>Totalscore: {element.totalScore}</Card.Text>
+                        <Link to={`/rating/${element._id}`}>
+                          <Button variant="primary">Read More</Button>
+                        </Link>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                );
+              })}
+          </Container>
         </div>
       )}
     </Container>

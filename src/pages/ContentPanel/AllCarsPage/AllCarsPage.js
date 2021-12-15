@@ -16,20 +16,20 @@ function AllCarsPage() {
   }, []);
 
   return (
-    <Container>
-      <h2> All the rated Cars </h2>
+    <Container className="mx-auto">
+      <h2 className="mt-3 mb-4 text-center"> All the rated Cars </h2>
       <Row>
         {cars &&
           cars.map((element) => {
             return (
               <Col>
-                <Card style={{ width: "16rem" }}>
-                  <Card.Img variant="top" src={element.image} />
+                <Card className="mx-auto my-3" style={{ width: "13rem" }}>
+                  {/* <Card.Img variant="top" src={element.image[0]} /> */}
                   <Card.Body>
                     <Card.Title>{element.model}</Card.Title>
                     <Card.Text>{element.brand}</Card.Text>
                     <Link to={`/car/${element._id}`}>
-                      <Button variant="primary">somewhere</Button>
+                      <Button variant="primary">Read More</Button>
                     </Link>
                   </Card.Body>
                 </Card>

@@ -14,7 +14,7 @@ function UserPage() {
       const response = await axios.get("http://localhost:5005/api/user", {
         headers: { Authorization: `Bearer ${authToken}` },
       });
-
+      console.log(response.data.ratings);
       setRatings(response.data.ratings);
     };
 
@@ -23,26 +23,40 @@ function UserPage() {
 
   return (
     <Container>
-      <h1>Profile Page</h1>
-      <Link to="/user/edit">Edit Profile</Link>
-      <Row>
-        {ratings &&
-          ratings.map((element) => {
-            return (
-              <Col>
-                <Card style={{ width: "18rem" }}>
-                  <Card.Body>
-                    <Card.Title>{element.title}</Card.Title>
-                    <Card.Text>{element.description}</Card.Text>
-                    <Link to={`/user/${element._id}`}>
-                      <Button variant="primary">somewhere</Button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </Col>
-            );
-          })}
-      </Row>
+      <Container className="mb-5 mt-3">
+        <Row>
+          <Col>
+            <h1>Profile Page</h1>
+          </Col>
+          <Col>
+            <Link to="/user/edit">
+              <Button>Edit Profile</Button>
+            </Link>
+          </Col>
+        </Row>
+      </Container>
+      <Container>
+        <Row>
+          {ratings &&
+            ratings.map((element) => {
+              return (
+                <Col>
+                  <Card className="mt-2" style={{ width: "18rem" }}>
+                    <Card.Body>
+                      <Card.Title>{element.title}</Card.Title>
+                      <Card.Text>{element.brand}</Card.Text>
+                      <Card.Text>{element.model}</Card.Text>
+                      <Card.Text>Total Score: {element.totalScore}</Card.Text>
+                      <Link to={`/user/${element._id}`}>
+                        <Button variant="primary">Edit Rating</Button>
+                      </Link>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })}
+        </Row>
+      </Container>
     </Container>
   );
 }

@@ -54,7 +54,7 @@ function SignupPage(props) {
   };
 
   return (
-    <Container>
+    <Container className="my-3">
       <h1>Sign Up</h1>
 
       <Form onSubmit={handleSignupSubmit}>
