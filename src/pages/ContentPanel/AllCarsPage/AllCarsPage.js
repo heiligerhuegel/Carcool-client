@@ -6,6 +6,7 @@ import axios from "axios";
 import { Container, Button, Form, Card, Row, Col } from "react-bootstrap";
 
 function AllCarsPage() {
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
   const [cars, setCars] = useState(null);
 
   const [allCars, setAllCars] = useState(null);
@@ -21,7 +22,7 @@ function AllCarsPage() {
 
   useEffect(() => {
     const getCars = async () => {
-      const response = await axios.get("http://localhost:5005/api/cars");
+      const response = await axios.get(`${API_URL}/api/cars`);
       setCars(response.data);
       console.log(response.data);
     };
@@ -30,7 +31,7 @@ function AllCarsPage() {
 
   useEffect(() => {
     const getAllBrands = async () => {
-      const response = await axios.get(`http://localhost:5005/api/allcars`);
+      const response = await axios.get(`${API_URL}/api/allcars`);
       setAllCars(response.data.Results);
       console.log(response.data);
     };

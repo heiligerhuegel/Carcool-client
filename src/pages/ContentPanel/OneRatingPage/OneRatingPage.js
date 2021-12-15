@@ -7,6 +7,7 @@ import axios from "axios";
 import { Container, Button, Row, Col } from "react-bootstrap";
 
 function OneRatingPage() {
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
   const { ratingId } = useParams();
 
   const [rating, setRating] = useState(null);
@@ -18,7 +19,7 @@ function OneRatingPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`http://localhost:5005/api/rating/${ratingId}`);
+      const result = await axios.get(`${API_URL}/api/rating/${ratingId}`);
       setRating(result.data);
       console.log(result.data);
     };

@@ -5,6 +5,7 @@ import axios from "axios";
 import { Container, Button, Carousel, Card, Col, Row } from "react-bootstrap";
 
 function HomePage() {
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
   const [cars, setCars] = useState(null);
   const [carImages, setCarImages] = useState(null);
 
@@ -12,7 +13,7 @@ function HomePage() {
 
   useEffect(() => {
     const getCars = async () => {
-      const result = await axios.get("http://localhost:5005/api/cars");
+      const result = await axios.get(`${API_URL}/api/cars`);
 
       setCars(result.data);
       console.log(result.data);

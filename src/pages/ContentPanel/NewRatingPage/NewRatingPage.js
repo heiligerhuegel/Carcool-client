@@ -7,6 +7,7 @@ import fileService from "./../../../services/file.service";
 import { Container, Button, Form, Row, Col } from "react-bootstrap";
 
 function NewRatingPage() {
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
   const [userid, setuserid] = useState("");
   const [allCars, setAllCars] = useState(null);
   const [allModels, setAllModels] = useState(null);
@@ -39,7 +40,7 @@ function NewRatingPage() {
 
   useEffect(() => {
     const getAllBrands = async () => {
-      const response = await axios.get(`http://localhost:5005/api/allcars`);
+      const response = await axios.get(`${API_URL}/api/allcars`);
       setAllCars(response.data.Results);
     };
     getAllBrands();
