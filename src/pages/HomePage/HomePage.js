@@ -45,7 +45,7 @@ function HomePage() {
 
   return (
     <Container>
-      <h1 className="mt-5 mb-4 text-center">Welcome to Carcool</h1>
+      <h1 className="my-3 mb-4 text-center">Welcome to Carcool</h1>
       {show && (
         <Container>
           <Carousel>
@@ -61,7 +61,7 @@ function HomePage() {
       )}
       {cars && (
         <Container className="mx-auto">
-          <h2 className="mt-3 mb-4 text-center"> All the rated Cars </h2>
+          <h2 className="my-3 mb-4 text-center"> All the rated Cars </h2>
           <Row>
             {cars &&
               cars.map((element) => {
@@ -73,7 +73,7 @@ function HomePage() {
                         <Card.Title>{element.brand}</Card.Title>
                         <Card.Title>{element.model}</Card.Title>
                         <Link to={`/car/${element._id}`}>
-                          <Button variant="primary">See More</Button>
+                          <Button variant="secondary">See More</Button>
                         </Link>
                       </Card.Body>
                     </Card>

@@ -59,7 +59,7 @@ function LoginPage(props) {
           <Form.Control type="password" placeholder="Password" value={password} onChange={handlePassword} />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="secondary" type="submit">
           Log In
         </Button>
       </Form>

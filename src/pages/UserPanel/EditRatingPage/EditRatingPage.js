@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { Container, Button, Form, Row, Col } from "react-bootstrap";
-import RangeSlider from "react-bootstrap-range-slider";
 
 function EditRatingPage() {
   const { rating } = useParams();
@@ -145,150 +144,157 @@ function EditRatingPage() {
     <Container>
       <h1>Edit this Review:</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Group as={Row}>
-          <Col xs="6">
-            <Form.Label>Brand:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Label>{brand}</Form.Label>
-          </Col>
-        </Form.Group>
-        <Form.Group as={Row}>
-          <Col xs="6">
-            <Form.Label>Model:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Label>{model}</Form.Label>
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Title:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Control type="text" value={title} onChange={handleTitle} />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Description:</Form.Label>
-          </Col>
-          <Col xs="12">
-            <Form.Control as="textarea" rows={3} value={description} onChange={handleDescription} />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Style:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider value={style} onChange={handleStyle} step={1} min="0" max="10" />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Acceleration:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider value={acceleration} onChange={handleAcceleration} step={1} min="0" max="10" />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Handling:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider value={handling} onChange={handleHandling} step={1} min="0" max="10" />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Fun:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider value={funfactor} onChange={handleFun} step={1} min="0" max="10" />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Cool:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider value={coolfactor} onChange={handleCool} step={1} min="0" max="10" />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Weekend Total:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Control type="number" value={weekend} readOnly />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Features:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider value={features} onChange={handleFeature} step={1} min="0" max="10" />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Comfort:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider value={comfort} onChange={handleComfort} step={1} min="0" max="10" />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Quality:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider value={quality} onChange={handleQuality} step={1} min="0" max="10" />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Practicality:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider value={practicality} onChange={handlePracticality} step={1} min="0" max="10" />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Value:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <RangeSlider value={value} onChange={handleValue} step={1} min="0" max="10" />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Daily Total:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Control type="number" value={daily} readOnly />
-          </Col>
-        </Form.Group>
-        <Form.Group className="mb-3" as={Row}>
-          <Col xs="6">
-            <Form.Label>Total Score:</Form.Label>
-          </Col>
-          <Col xs="6">
-            <Form.Control type="number" value={totalScore} readOnly />
-          </Col>
-        </Form.Group>
-        <Button type="submit">Submit</Button>
-        {/* <Button
+        <Container>
+          <Form.Group as={Row}>
+            <Col xs="6">
+              <Form.Label>Brand:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Label>{brand}</Form.Label>
+            </Col>
+          </Form.Group>
+          <Form.Group as={Row}>
+            <Col xs="6">
+              <Form.Label>Model:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Label>{model}</Form.Label>
+            </Col>
+          </Form.Group>
+        </Container>
+
+        <Container>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Title:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Control type="text" value={title} onChange={handleTitle} />
+              <Form.Text className="text-muted">Please give your rating a title.</Form.Text>
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Description:</Form.Label>
+            </Col>
+            <Col xs="12">
+              <Form.Control as="textarea" rows={3} value={description} onChange={handleDescription} />
+              <Form.Text className="text-muted">Please give your rating a description.</Form.Text>
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Style:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Range value={style} onChange={handleStyle} step={1} min="0" max="10" />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Acceleration:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Range value={acceleration} onChange={handleAcceleration} step={1} min="0" max="10" />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Handling:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Range value={handling} onChange={handleHandling} step={1} min="0" max="10" />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Fun:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Range value={funfactor} onChange={handleFun} step={1} min="0" max="10" />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Cool:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Range value={coolfactor} onChange={handleCool} step={1} min="0" max="10" />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Weekend Total:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Control type="number" value={weekend} readOnly />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Features:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Range value={features} onChange={handleFeature} step={1} min="0" max="10" />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Comfort:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Range value={comfort} onChange={handleComfort} step={1} min="0" max="10" />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Quality:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Range value={quality} onChange={handleQuality} step={1} min="0" max="10" />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Practicality:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Range value={practicality} onChange={handlePracticality} step={1} min="0" max="10" />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Value:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Range value={value} onChange={handleValue} step={1} min="0" max="10" />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Daily Total:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Control type="number" value={daily} readOnly />
+            </Col>
+          </Form.Group>
+          <Form.Group className="mb-3" as={Row}>
+            <Col xs="6">
+              <Form.Label>Total Score:</Form.Label>
+            </Col>
+            <Col xs="6">
+              <Form.Control type="number" value={totalScore} readOnly />
+            </Col>
+          </Form.Group>
+          {title && description && <Button type="submit">Submit</Button>}
+          {/* <Button
           onClick={() => {
             deleteRating();
           }}
         >
           Delete Rating
         </Button> */}
+        </Container>
       </Form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
     </Container>

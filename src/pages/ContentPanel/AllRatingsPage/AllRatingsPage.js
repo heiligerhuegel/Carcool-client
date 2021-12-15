@@ -83,15 +83,15 @@ function AllRatingsPage() {
   // }, [car]);
 
   return (
-    <Container className="mt-1 mx-auto text-center">
+    <Container className="my-1 mx-auto text-center">
       {car && (
         <div>
-          <h1 className="mt-5 mb-1 text-center">{car.brand}</h1>
-          <h2 className="mt-4  text-center">{car.model}</h2>
-          <h2 className="mt-3  text-center">Average TotalScore: {totalScoreAvg}</h2>
-          <h4 className="mt-1  text-center">Average Weekend Score: {totalWeeklyAvg}</h4>
-          <h4 className="mt-1  text-center">Average Daily Score: {totalDailyAvg}</h4>
-          <Container as={Row} className="mt-1 mx-auto text-center">
+          <h1 className="my-5 mb-1 text-center">{car.brand}</h1>
+          <h2 className="my-4  text-center">{car.model}</h2>
+          <h2 className="my-3  text-center">Average TotalScore: {totalScoreAvg}</h2>
+          <h4 className="my-1  text-center">Average Weekend Score: {totalWeeklyAvg}</h4>
+          <h4 className="my-1  text-center">Average Daily Score: {totalDailyAvg}</h4>
+          <Container as={Row} className="my-3 mx-auto text-center">
             {ratings &&
               ratings.map((element) => {
                 return (
@@ -101,7 +101,7 @@ function AllRatingsPage() {
                         <Card.Title>Title: {element.title}</Card.Title>
                         <Card.Text>Totalscore: {element.totalScore}</Card.Text>
                         <Link to={`/rating/${element._id}`}>
-                          <Button variant="primary">Read More</Button>
+                          <Button variant="secondary">Read More</Button>
                         </Link>
                       </Card.Body>
                     </Card>

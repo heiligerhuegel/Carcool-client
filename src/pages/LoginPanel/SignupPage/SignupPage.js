@@ -82,7 +82,7 @@ function SignupPage(props) {
           </Col>
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="secondary" type="submit">
           Sign Up
         </Button>
       </Form>

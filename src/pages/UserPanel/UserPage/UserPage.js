@@ -23,7 +23,7 @@ function UserPage() {
 
   return (
     <Container>
-      <Container className="mb-5 mt-3">
+      <Container className="my-3">
         <Row>
           <Col>
             <h1>Profile Page</h1>
@@ -41,14 +41,14 @@ function UserPage() {
             ratings.map((element) => {
               return (
                 <Col>
-                  <Card className="mt-2" style={{ width: "18rem" }}>
+                  <Card className="mx-auto my-3" style={{ width: "18rem" }}>
                     <Card.Body>
                       <Card.Title>{element.title}</Card.Title>
                       <Card.Text>{element.brand}</Card.Text>
                       <Card.Text>{element.model}</Card.Text>
                       <Card.Text>Total Score: {element.totalScore}</Card.Text>
                       <Link to={`/user/${element._id}`}>
-                        <Button variant="primary">Edit Rating</Button>
+                        <Button variant="secondary">Edit Rating</Button>
                       </Link>
                     </Card.Body>
                   </Card>

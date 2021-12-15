@@ -5,12 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import fileService from "./../../../services/file.service";
 
 import { Container, Button, Form, Row, Col } from "react-bootstrap";
-import RangeSlider from "react-bootstrap-range-slider";
 
 function NewRatingPage() {
   const [userid, setuserid] = useState("");
   const [allCars, setAllCars] = useState(null);
   const [allModels, setAllModels] = useState(null);
+
+  const [uploadDone, setuploadDone] = useState("");
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -140,19 +141,21 @@ function NewRatingPage() {
 
   const handleFileUpload = async (e) => {
     try {
+      setuploadDone("disabled");
       const uploadData = new FormData();
 
       uploadData.append("imageUrl", e.target.files[0]);
       const response = await fileService.uploadImage(uploadData);
       console.log(response.data.secure_url);
       setImage(response.data.secure_url);
+      setuploadDone("");
     } catch (error) {
       setErrorMessage("Something went wrong");
     }
   };
 
   return (
-    <Container key="newRatingsPage">
+    <Container className="my-3">
       <h1>Create a new Review:</h1>
       <Form onSubmit={handleSubmit}>
         <Container key="carselector">
@@ -190,15 +193,23 @@ function NewRatingPage() {
             </Form.Group>
           )}
         </Container>
-        <br />
+        <Container>
+          {brand && !allModels && (
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" role="status"></div>
+            </div>
+          )}
+        </Container>
+
         {model && (
           <Container>
             <Form.Group className="mb-3" as={Row}>
               <Col xs="6">
                 <Form.Label>Title:</Form.Label>
               </Col>
-              <Col xs="6">
+              <Col xs="12">
                 <Form.Control type="text" value={title} onChange={handleTitle} />
+                <Form.Text className="text-muted">Please give your rating a title.</Form.Text>
               </Col>
             </Form.Group>
 
@@ -208,15 +219,16 @@ function NewRatingPage() {
               </Col>
               <Col xs="12">
                 <Form.Control as="textarea" rows={3} value={description} onChange={handleDescription} />
+                <Form.Text className="text-muted">Please give your rating a description.</Form.Text>
               </Col>
             </Form.Group>
 
             <Form.Group className="mb-3" as={Row}>
               <Col xs="6">
-                <Form.Label>Style:</Form.Label>
+                <Form.Label>Style: </Form.Label>
               </Col>
               <Col xs="6">
-                <RangeSlider value={style} onChange={handleStyle} step={1} min="0" max="10" />
+                <Form.Range value={style} onChange={handleStyle} step={1} min="0" max="10" />
               </Col>
             </Form.Group>
 
@@ -225,7 +237,7 @@ function NewRatingPage() {
                 <Form.Label>Acceleration:</Form.Label>
               </Col>
               <Col xs="6">
-                <RangeSlider value={acceleration} onChange={handleAcceleration} step={1} min="0" max="10" />
+                <Form.Range value={acceleration} onChange={handleAcceleration} step={1} min="0" max="10" />
               </Col>
             </Form.Group>
 
@@ -234,7 +246,7 @@ function NewRatingPage() {
                 <Form.Label>Handling:</Form.Label>
               </Col>
               <Col xs="6">
-                <RangeSlider value={handling} onChange={handleHandling} step={1} min="0" max="10" />
+                <Form.Range value={handling} onChange={handleHandling} step={1} min="0" max="10" />
               </Col>
             </Form.Group>
 
@@ -243,7 +255,7 @@ function NewRatingPage() {
                 <Form.Label>Fun:</Form.Label>
               </Col>
               <Col xs="6">
-                <RangeSlider value={funfactor} onChange={handleFun} step={1} min="0" max="10" />
+                <Form.Range value={funfactor} onChange={handleFun} step={1} min="0" max="10" />
               </Col>
             </Form.Group>
             <Form.Group className="mb-3" as={Row}>
@@ -251,7 +263,7 @@ function NewRatingPage() {
                 <Form.Label>Cool:</Form.Label>
               </Col>
               <Col xs="6">
-                <RangeSlider value={coolfactor} onChange={handleCool} step={1} min="0" max="10" />
+                <Form.Range value={coolfactor} onChange={handleCool} step={1} min="0" max="10" />
               </Col>
             </Form.Group>
 
@@ -269,7 +281,7 @@ function NewRatingPage() {
                 <Form.Label>Features:</Form.Label>
               </Col>
               <Col xs="6">
-                <RangeSlider value={features} onChange={handleFeature} step={1} min="0" max="10" />
+                <Form.Range value={features} onChange={handleFeature} step={1} min="0" max="10" />
               </Col>
             </Form.Group>
 
@@ -278,7 +290,7 @@ function NewRatingPage() {
                 <Form.Label>Comfort:</Form.Label>
               </Col>
               <Col xs="6">
-                <RangeSlider value={comfort} onChange={handleComfort} step={1} min="0" max="10" />
+                <Form.Range value={comfort} onChange={handleComfort} step={1} min="0" max="10" />
               </Col>
             </Form.Group>
 
@@ -287,7 +299,7 @@ function NewRatingPage() {
                 <Form.Label>Quality:</Form.Label>
               </Col>
               <Col xs="6">
-                <RangeSlider value={quality} onChange={handleQuality} step={1} min="0" max="10" />
+                <Form.Range value={quality} onChange={handleQuality} step={1} min="0" max="10" />
               </Col>
             </Form.Group>
 
@@ -296,7 +308,7 @@ function NewRatingPage() {
                 <Form.Label>Practicality:</Form.Label>
               </Col>
               <Col xs="6">
-                <RangeSlider value={practicality} onChange={handlePracticality} step={1} min="0" max="10" />
+                <Form.Range value={practicality} onChange={handlePracticality} step={1} min="0" max="10" />
               </Col>
             </Form.Group>
 
@@ -305,7 +317,7 @@ function NewRatingPage() {
                 <Form.Label>Value:</Form.Label>
               </Col>
               <Col xs="6">
-                <RangeSlider value={value} onChange={handleValue} step={1} min="0" max="10" />
+                <Form.Range value={value} onChange={handleValue} step={1} min="0" max="10" />
               </Col>
             </Form.Group>
 
@@ -335,7 +347,13 @@ function NewRatingPage() {
                 <Form.Control type="file" size="sm" onChange={handleFileUpload} />
               </Col>
             </Form.Group>
-            {(title, description && <Button type="submit">Submit</Button>)}
+            {title && description && (
+              <Col className="">
+                <Button type="submit" className={`${uploadDone}`}>
+                  Submit
+                </Button>
+              </Col>
+            )}
           </Container>
         )}
       </Form>

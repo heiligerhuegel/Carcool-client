@@ -67,7 +67,7 @@ function EditUserPage() {
           <Form.Control type="file" size="sm" onChange={handleFileUpload} />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="secondary" type="submit">
           Change and Logout to reset.
         </Button>
       </Form>

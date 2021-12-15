@@ -1,24 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 body {
-  background-color: #343f5c;
+  background-color: #c9dfec;
+  color: #343f5c;
+  font-family: "Roboto", sans-serif;
 }
 
-.Carousel {
-  height: 300px;
+.carousel {
+  height: 400px;
 }
 .carousel .carousel-item {
-  height: 300px;
+  height: 400px;
+}
+.card {
+  border: 2px solid #ec5e04;
+}
+
+.btn-secondary {
+  background-color: #ec5e04 !important;
+  border: none;
 }
 
 .carousel-item img {
-  position: absolute;
+  position: center;
   object-fit: cover;
   top: 0;
   left: 0;
-  min-height: 200px;
+  min-height: 400px;
 }
 
 /* 
-- Darkblue  / Headlines but with orange outline
+- Darkblue #343f5c / Headlines but with orange outline
 - Lightblue #c9dfec / Background Cards 
 - Orange #ec5e04 / Borders Cards and Image 
 - White #ffffff / Text  */
