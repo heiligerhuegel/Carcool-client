@@ -5,7 +5,8 @@ import { Container, Form, Button, Col, Row } from "react-bootstrap";
 
 import fileService from "./../../../services/file.service";
 
-function SignupPage(props) {
+function SignupPage() {
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -25,7 +26,7 @@ function SignupPage(props) {
       const requestBody = { email, password, name, imageUrl };
 
       const authToken = localStorage.getItem("authToken");
-      await axios.post("http://localhost:5005/auth/signup", requestBody, {
+      await axios.post(`${API_URL}/auth/signup`, requestBody, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
 

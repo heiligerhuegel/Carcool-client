@@ -8,6 +8,7 @@ import Logo from "./carcoollogo.png";
 
 function NavbarComponent() {
   // Get the value from the context
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
   const { isLoggedIn, user, logOutUser, isAdmin } = useContext(AuthContext);
 
   return (
@@ -21,8 +22,8 @@ function NavbarComponent() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/allcars">All Cars</Nav.Link>
-            <Nav.Link href="/newrating">New Rating</Nav.Link>
+            <Nav.Link to="/allcars">All Cars</Nav.Link>
+            <Nav.Link to="/newrating">New Rating</Nav.Link>
             <NavDropdown title="Profile" id="basic-nav-dropdown">
               {!isLoggedIn && (
                 <NavDropdown.Item href="#action/3.1">

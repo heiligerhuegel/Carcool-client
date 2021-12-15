@@ -7,6 +7,7 @@ import axios from "axios";
 import { Container, Button, Row, Col, Card } from "react-bootstrap";
 
 function AllRatingsPage() {
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
   const { carId } = useParams();
 
   const [car, setCar] = useState([]);
@@ -20,7 +21,7 @@ function AllRatingsPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`http://localhost:5005/api/onecar/${carId}`);
+      const result = await axios.get(`${API_URL}/api/onecar/${carId}`);
       setCar(result.data);
       console.log(result.data);
     };
