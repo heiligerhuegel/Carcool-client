@@ -4,6 +4,7 @@ import React, { createContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 
 function AuthProviderWrapper({ children }) {
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [user, setUser] = useState(null);
@@ -16,7 +17,7 @@ function AuthProviderWrapper({ children }) {
       const storedToken = localStorage.getItem("authToken");
 
       if (storedToken) {
-        const response = await axios.get("http://localhost:5005/auth/verify", {
+        const response = await axios.get(`${API_URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${storedToken}` },
         });
         // or with a service
@@ -55,8 +56,6 @@ function AuthProviderWrapper({ children }) {
     setIsAdmin(false);
   };
 
- 
-
   useEffect(() => {
     verifyStoredToken();
   }, []);
@@ -70,7 +69,6 @@ function AuthProviderWrapper({ children }) {
         user,
         logInUser,
         logOutUser,
-       
       }}
     >
       {children}
