@@ -91,7 +91,7 @@ function SignupPage(props) {
 
       <p>Already have account?</p>
       <Link to={"/login"}>
-        <Button>Log In</Button>
+        <Button variant="secondary">Log In</Button>
       </Link>
     </Container>
   );
