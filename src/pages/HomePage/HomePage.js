@@ -6,6 +6,7 @@ import { Container, Button, Carousel, Card, Col, Row } from "react-bootstrap";
 
 function HomePage() {
   const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
+
   const [cars, setCars] = useState(null);
   const [carImages, setCarImages] = useState(null);
 
