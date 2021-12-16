@@ -9,6 +9,7 @@ import { useContext } from "react";
 import { Form, Row, Col, Button, Container } from "react-bootstrap";
 
 function EditUserPage() {
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [image, setImage] = useState("default");
@@ -26,7 +27,7 @@ function EditUserPage() {
       const requestBody = { name: name, image: image };
 
       const authToken = localStorage.getItem("authToken");
-      await axios.put("http://localhost:5005/api/user/edit", requestBody, {
+      await axios.put(`${API_URL}/api/user/edit`, requestBody, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       logOutUser();

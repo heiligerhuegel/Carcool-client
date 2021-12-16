@@ -6,12 +6,13 @@ import axios from "axios";
 import { Container, Button, Card, Col, Row } from "react-bootstrap";
 
 function UserPage() {
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
   const [ratings, setRatings] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       const authToken = localStorage.getItem("authToken");
-      const response = await axios.get("http://localhost:5005/api/user", {
+      const response = await axios.get(`${API_URL}/api/user`, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       console.log(response.data.ratings);

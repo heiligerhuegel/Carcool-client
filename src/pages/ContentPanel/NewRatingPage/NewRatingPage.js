@@ -76,7 +76,7 @@ function NewRatingPage() {
   useEffect(() => {
     const getData = async () => {
       const authToken = localStorage.getItem("authToken");
-      const response = await axios.get("http://localhost:5005/api/user", {
+      const response = await axios.get(`${API_URL}/api/user`, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       setuserid(response.data._id);
@@ -131,7 +131,7 @@ function NewRatingPage() {
         },
       };
       console.log(newRating);
-      const response = await axios.post("http://localhost:5005/api/newrating", newRating);
+      const response = await axios.post(`${API_URL}/api/newrating`, newRating);
       console.log(response);
       navigate(`/rating/${response.data._id}`);
     } catch (error) {

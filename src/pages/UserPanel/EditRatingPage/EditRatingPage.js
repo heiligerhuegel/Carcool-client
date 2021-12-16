@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Container, Button, Form, Row, Col } from "react-bootstrap";
 
 function EditRatingPage() {
+  const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
   const { rating } = useParams();
 
   const [userid, setuserid] = useState("");
@@ -35,7 +36,7 @@ function EditRatingPage() {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await axios.get(`http://localhost:5005/api/rating/${rating}`);
+      const response = await axios.get(`${API_URL}/api/rating/${rating}`);
 
       console.log(response.data);
 
@@ -79,7 +80,7 @@ function EditRatingPage() {
   useEffect(() => {
     const getData = async () => {
       const authToken = localStorage.getItem("authToken");
-      const response = await axios.get("http://localhost:5005/api/user", {
+      const response = await axios.get(`${API_URL}/api/user`, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       setuserid(response.data._id);
@@ -121,7 +122,7 @@ function EditRatingPage() {
         },
       };
       console.log(newRating);
-      const response = await axios.put(`http://localhost:5005/api/rating/${rating}`, newRating);
+      const response = await axios.put(`${API_URL}/api/rating/${rating}`, newRating);
       console.log(response);
       navigate(`/user`);
     } catch (error) {
@@ -132,7 +133,7 @@ function EditRatingPage() {
 
   const deleteRating = async () => {
     try {
-      const response = await axios.delete(`http://localhost:5005/api/rating/delete/${rating}`);
+      const response = await axios.delete(`${API_URL}/api/rating/delete/${rating}`);
       console.log(response);
       navigate(`/user`);
     } catch (error) {
