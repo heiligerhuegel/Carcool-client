@@ -145,7 +145,7 @@ function App() {
             </IsAdmin>
           }
         />
-        <Route path="/*" element={<ErrorPage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   );

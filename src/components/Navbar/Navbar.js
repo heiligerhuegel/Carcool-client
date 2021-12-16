@@ -21,8 +21,12 @@ function NavbarComponent() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/allcars">All Cars</Nav.Link>
-            <Nav.Link href="/newrating">New Rating</Nav.Link>
+            <Link className="nav-link" to="/allcars">
+              All Cars
+            </Link>
+            <Link className="nav-link" to="/newrating">
+              New Rating
+            </Link>
             <NavDropdown title="Profile" id="basic-nav-dropdown">
               {!isLoggedIn && (
                 <NavDropdown.Item href="#action/3.1">
