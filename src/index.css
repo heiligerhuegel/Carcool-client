@@ -7,10 +7,12 @@ body {
 }
 
 .carousel {
-  height: 400px;
+  min-height: 200px;
+  max-height: 400px;
 }
 .carousel .carousel-item {
-  height: 400px;
+  min-height: 200px;
+  max-height: 400px;
 }
 .card {
   border: 2px solid #ec5e04;
@@ -26,7 +28,8 @@ body {
   object-fit: cover;
   top: 0;
   left: 0;
-  min-height: 400px;
+  min-height: 200px;
+  max-height: 400px;
 }
 
 /* 
