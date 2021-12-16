@@ -50,7 +50,7 @@ function SignupPage(props) {
       const response = await fileService.uploadImage(uploadData);
       setImageUrl(response.data.secure_url);
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
     }
   };
 

@@ -38,7 +38,7 @@ function EditRatingPage() {
     const getData = async () => {
       const response = await axios.get(`${API_URL}/api/rating/${rating}`);
 
-      console.log(response.data);
+      // console.log(response.data);
 
       setTitle(response.data.title);
       setDescription(response.data.description);
@@ -121,9 +121,9 @@ function EditRatingPage() {
           daily: { features, comfort, quality, practicality, value },
         },
       };
-      console.log(newRating);
+      // console.log(newRating);
       const response = await axios.put(`${API_URL}/api/rating/${rating}`, newRating);
-      console.log(response);
+      // console.log(response);
       navigate(`/user`);
     } catch (error) {
       // If the request resolves with an error, set the error message in the state
@@ -134,7 +134,7 @@ function EditRatingPage() {
   const deleteRating = async () => {
     try {
       const response = await axios.delete(`${API_URL}/api/rating/delete/${rating}`);
-      console.log(response);
+      // console.log(response);
       navigate(`/user`);
     } catch (error) {
       setErrorMessage("Something went wrong");

@@ -15,7 +15,7 @@ function UserPage() {
       const response = await axios.get(`${API_URL}/api/user`, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
-      console.log(response.data.ratings);
+      // console.log(response.data.ratings);
       setRatings(response.data.ratings);
     };
 

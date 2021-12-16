@@ -24,7 +24,7 @@ function AllCarsPage() {
     const getCars = async () => {
       const response = await axios.get(`${API_URL}/api/cars`);
       setCars(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     };
     getCars();
   }, []);
@@ -33,7 +33,7 @@ function AllCarsPage() {
     const getAllBrands = async () => {
       const response = await axios.get(`${API_URL}/api/allcars`);
       setAllCars(response.data.Results);
-      console.log(response.data);
+      // console.log(response.data);
     };
     getAllBrands();
   }, []);
@@ -64,7 +64,7 @@ function AllCarsPage() {
     } else {
       setshowMessage(false);
     }
-    console.log(filterBrandsData);
+    // console.log(filterBrandsData);
   };
 
   const handleAllCarModels = async (e) => {
@@ -81,7 +81,7 @@ function AllCarsPage() {
       setshowMessage(false);
     }
 
-    console.log(filterModelsData);
+    // console.log(filterModelsData);
   };
   const resetFilter = async (e) => {
     setModel(null);

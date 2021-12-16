@@ -23,7 +23,7 @@ function AllRatingsPage() {
     const fetchData = async () => {
       const result = await axios.get(`${API_URL}/api/onecar/${carId}`);
       setCar(result.data);
-      console.log(result.data);
+      // console.log(result.data);
     };
     fetchData();
   }, []);
@@ -31,7 +31,7 @@ function AllRatingsPage() {
   useEffect(() => {
     const ratingsData = car.ratings;
     setRatings(ratingsData);
-    console.log(ratingsData);
+    // console.log(ratingsData);
   }, [car]);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function AllRatingsPage() {
           }
         });
         dailyScore = Math.round(dailyScore / ratings.length);
-        console.log(dailyScore);
+        // console.log(dailyScore);
         setTotalDailyAvg(dailyScore);
       }
     };
@@ -61,7 +61,7 @@ function AllRatingsPage() {
           }
         });
         weeklyScore = Math.round(weeklyScore / ratings.length);
-        console.log(weeklyScore);
+        // console.log(weeklyScore);
         setTotalWeeklyAvg(weeklyScore);
       }
     };
@@ -70,18 +70,13 @@ function AllRatingsPage() {
 
   useEffect(() => {
     const getTotal = () => {
-      const totalScore = (totalDailyAvg + totalWeeklyAvg) / 2;
+      const totalScore = totalDailyAvg + totalWeeklyAvg;
       setTotalScoreAvg(totalScore);
     };
 
     getTotal();
   }, [totalDailyAvg, totalWeeklyAvg]);
 
-  // useEffect(() => {
-  //   const imagesData = car.image;
-  //   setImages(imagesData);
-  //   console.log(images);
-  // }, [car]);
 
   return (
     <Container className="my-1 mx-auto text-center">

@@ -48,9 +48,9 @@ function EditUserPage() {
       const imageUrl = response.data.secure_url;
 
       setImage(imageUrl);
-      console.log("done");
+      // console.log("done");
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
     }
   };
   return (

@@ -130,9 +130,9 @@ function NewRatingPage() {
           daily: { features, comfort, quality, practicality, value },
         },
       };
-      console.log(newRating);
+      // console.log(newRating);
       const response = await axios.post(`${API_URL}/api/newrating`, newRating);
-      console.log(response);
+      // console.log(response);
       navigate(`/rating/${response.data._id}`);
     } catch (error) {
       // If the request resolves with an error, set the error message in the state
@@ -147,7 +147,7 @@ function NewRatingPage() {
 
       uploadData.append("imageUrl", e.target.files[0]);
       const response = await fileService.uploadImage(uploadData);
-      console.log(response.data.secure_url);
+      // console.log(response.data.secure_url);
       setImage(response.data.secure_url);
       setuploadDone("");
     } catch (error) {

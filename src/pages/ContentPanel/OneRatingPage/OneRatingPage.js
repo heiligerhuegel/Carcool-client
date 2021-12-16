@@ -21,7 +21,7 @@ function OneRatingPage() {
     const fetchData = async () => {
       const result = await axios.get(`${API_URL}/api/rating/${ratingId}`);
       setRating(result.data);
-      console.log(result.data);
+      // console.log(result.data);
     };
     fetchData();
   }, []);
@@ -34,7 +34,7 @@ function OneRatingPage() {
           dailyScore += rating.ratings.daily[property];
         }
 
-        console.log(dailyScore);
+        // console.log(dailyScore);
         setTotalDailyAvg(dailyScore);
       }
     };
@@ -50,7 +50,7 @@ function OneRatingPage() {
         }
       }
 
-      console.log(weeklyScore);
+      // console.log(weeklyScore);
       setTotalWeeklyAvg(weeklyScore);
     };
     getWeekly();

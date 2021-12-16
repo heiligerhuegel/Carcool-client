@@ -16,14 +16,14 @@ function HomePage() {
       const result = await axios.get(`${API_URL}/api/cars`);
 
       setCars(result.data);
-      console.log(result.data);
+      // console.log(result.data);
     };
     getCars();
   }, []);
 
   useEffect(() => {
     if (cars) {
-      console.log(cars);
+      // console.log(cars);
       const carImagesData = cars
         .filter((element) => {
           if (element.image[0] === undefined || element.image[0] === null || element.image[0] === "") {
@@ -36,7 +36,7 @@ function HomePage() {
           return element.image[0];
         });
 
-      console.log("carImagesData", carImagesData);
+      // console.log("carImagesData", carImagesData);
       setCarImages(carImagesData);
       if (carImagesData.length > 0) {
         setShow(true);
