@@ -6,7 +6,7 @@ import { Container, Button, Carousel, Card, Col, Row } from "react-bootstrap";
 
 function HomePage() {
   const API_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5005";
-
+  const NEWS_KEY = process.env.NEWS_KEY;
   const [cars, setCars] = useState(null);
   const [carImages, setCarImages] = useState(null);
 
@@ -17,9 +17,7 @@ function HomePage() {
   useEffect(() => {
     const getNews = async () => {
       try {
-        const response = await axios.get(
-          `https://newsdata.io/api/1/news?apikey=${process.env.NEWS_KEY}&q=Automotive&language=en`
-        );
+        const response = await axios.get(`https://newsdata.io/api/1/news?apikey=${NEWS_KEY}&q=Automotive&language=en`);
 
         console.log(response.data);
       } catch (error) {
