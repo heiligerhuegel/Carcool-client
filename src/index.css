@@ -28,8 +28,7 @@ body {
   object-fit: cover;
   top: 0;
   left: 0;
-  min-height: 200px;
-  max-height: 400px;
+  height: 300px;
 }
 
 /* 
