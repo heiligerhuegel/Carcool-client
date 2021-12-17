@@ -12,6 +12,8 @@ function HomePage() {
 
   const [show, setShow] = useState(false);
 
+  const [news, setnews] = useState(null);
+
   useEffect(() => {
     const getCars = async () => {
       const result = await axios.get(`${API_URL}/api/cars`);
@@ -20,6 +22,21 @@ function HomePage() {
       // console.log(result.data);
     };
     getCars();
+  }, []);
+
+  useEffect(() => {
+    let newsData;
+    const getNewsData = async () => {
+      var url =
+        "https://api.currentsapi.services/v1/search?" +
+        "keywords=Automotive&language=en&" +
+        "apiKey=DboRVCe6pJJTG3oUOkOFKY8RkP2Nc62kikBNvkinyLvG7yTg";
+      var req = new Request(url);
+      const response = await axios.get(url);
+      console.log(response.data.news);
+      setnews(response.data.news);
+    };
+    getNewsData();
   }, []);
 
   useEffect(() => {
@@ -46,7 +63,7 @@ function HomePage() {
   }, [cars]);
 
   return (
-    <Container>
+    <Container key="landingpage">
       <h1 className="my-3 mb-4 text-center">Welcome to Carcool</h1>
       {show && (
         <Container>
@@ -76,6 +93,29 @@ function HomePage() {
                         <Card.Title>{element.model}</Card.Title>
                         <Link to={`/car/${element._id}`}>
                           <Button variant="secondary">See More</Button>
+                        </Link>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                );
+              })}
+          </Row>
+        </Container>
+      )}
+      {news && (
+        <Container className="mx-auto">
+          <h2 className="my-3 mb-4 text-center"> Latest Automotive News: </h2>
+          <Row>
+            {news &&
+              news.map((element) => {
+                return (
+                  <Col>
+                    <Card className="mx-auto my-3" style={{ width: "13rem" }}>
+                      {element.image !== "None" && <Card.Img variant="top" src={element.image} />}
+                      <Card.Body>
+                        <Card.Title>{element.title}</Card.Title>
+                        <Link to={`${element.url}`}>
+                          <Button variant="secondary">Read More</Button>
                         </Link>
                       </Card.Body>
                     </Card>
