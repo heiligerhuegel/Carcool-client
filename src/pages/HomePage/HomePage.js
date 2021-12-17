@@ -114,9 +114,6 @@ function HomePage() {
                       {element.image !== "None" && <Card.Img variant="top" src={element.image} />}
                       <Card.Body>
                         <Card.Title>{element.title}</Card.Title>
-                        <Link to={`${element.url}`}>
-                          <Button variant="secondary">Read More</Button>
-                        </Link>
                       </Card.Body>
                     </Card>
                   </Col>
